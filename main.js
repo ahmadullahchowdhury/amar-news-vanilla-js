@@ -1,7 +1,6 @@
-const spinnerOnoff = loadingTrueFalse =>{
-
+const spinnerOnoff = loadingTrueFalse => {
     const loaderSection = document.getElementById('spinner')
-    if(loadingTrueFalse){
+    if (loadingTrueFalse) {
         const newsId = document.getElementById('news-id')
         newsId.innerHTML = ''
 
@@ -9,7 +8,7 @@ const spinnerOnoff = loadingTrueFalse =>{
         newsCountElm.innerHTML = 'Loading'
         loaderSection.classList.remove('d-none')
     }
-    else{
+    else {
         loaderSection.classList.add('d-none')
     }
 }
@@ -22,7 +21,7 @@ const loadApi = async () => {
         return data.data.news_category
     }
     catch (e) {
-        alert("There is error which shows " + e.message); //Handling error  
+        alert("There is error which shows " + e.message);
     }
 
 }
@@ -49,28 +48,26 @@ displayCat()
 const myFunction = async (id) => {
 
 
-    // console.log(id)
+
 
     try {
 
-        // spinnerOnoff(true)
-
         const response = await fetch(`https://openapi.programming-hero.com/api/news/category/0${id}`)
         const data = await response.json()
-    
-        const sorrtedArr = data.data.sort((a, b) => b.total_view - a.total_view);
-    
-        // console.log(data.data)
-    
-        console.log(sorrtedArr);
-    
+
+        const sortedArr = data.data.sort((a, b) => b.total_view - a.total_view);
+
+
+
+        console.log(sortedArr);
+
         const newsId = document.getElementById('news-id')
         newsId.innerHTML = ''
-    
-    
-        for (d of sorrtedArr) {
+
+
+        for (d of sortedArr) {
             // console.log(d)
-    
+
             const div = document.createElement('div')
             div.innerHTML = `        <div class="card mb-3" style="max-width:1400px;">
             <div class="row g-0">
@@ -80,7 +77,7 @@ const myFunction = async (id) => {
                 <div class="col-md-10">
                     <div class="card-body">
                         <h5 class="card-title">${d.title}</h5>
-                        <p class="card-text">${d.details.slice(0, 250)}....</p>
+                        <p class="card-text">${d.details.length > 250 ? d.details.slice(0, 250) + '.......' : d.details}</p>
                         <div class="d-flex flex-row justify-content-between ">
                             <div class="d-flex flex-row">
                                 <img src="${d.author.img}" width="50px" height="50px" class="img-fluid  rounded-circle me-2" alt="...">
@@ -97,15 +94,15 @@ const myFunction = async (id) => {
                 </div>
             </div>
         </div>`
-    
-    
+
+
             newsId.append(div)
         }
 
         spinnerOnoff(false)
-    
+
         const newsCountElm = document.getElementById('news-count')
-        newsCountElm.innerText = `${data.data.length ? data.data.length : 'No' }  news in this category`
+        newsCountElm.innerText = `${data.data.length ? data.data.length : 'No'}  news in this category`
     } catch (e) {
         alert("There is error which shows " + e.message); //Handling error  
     }
