@@ -1,14 +1,24 @@
-@media only screen 
-and (min-device-width: 375px) 
-and (max-device-width: 667px) 
-and (-webkit-min-device-pixel-ratio: 2) { 
-  .img-fluid{
-      width: 55vh;
-  }
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+    .img-fluid {
+        width: 55vh;
+    }
 
 }
 
 li:hover {
     color: #0dcaf0
-  }
-  
+}
+
+
+
+/* #footer {
+           /* Footer height */
