@@ -33,7 +33,50 @@ const myFunction = async(id) => {
 
     const response = await fetch(`https://openapi.programming-hero.com/api/news/category/0${id}`)
     const data = await response.json()
-    console.log(data.data.length)
+    
+    console.log(data.data)
+
+    const newsId = document.getElementById('news-id')
+    newsId.innerHTML = ''
+
+    for(d of data.data){
+        // console.log(d)
+
+        
+        const div = document.createElement('div')
+        div.innerHTML = `        <div class="card mb-3" style="max-width:1200px;">
+        <div class="row g-0">
+            <div class="col-md-2">
+                <img src="${d.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">${d.title}</h5>
+                    <p class="card-text">${d.details.slice(0, 250)}</p>
+                    <div class="d-flex flex-row justify-content-between ">
+                        <div class="d-flex flex-row">
+                            <img src="${d.author.img}" width="50px" height="50px" class="img-fluid  rounded-circle" alt="...">
+                            <p class="card-text me-3"><small class="text-muted">${d.author.name}</small></p>
+                        </div>
+                        <p class="card-text"><small class="text-muted">${d.total_view}</small></p>
+                        <div>
+                            <button class="btn btn-primary btn-sm"
+                                style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>`
+
+    newsId.append(div)
+
+        // console.log(d.author.name)
+        // console.log(d.title)
+        // console.log(d.total_view)
+        // console.log(d.details)
+    }
 
     const newsCountElm = document.getElementById('news-count')
     newsCountElm.innerText = `${data.data.length}  news in this category`
