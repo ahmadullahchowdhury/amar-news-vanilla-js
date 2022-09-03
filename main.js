@@ -1,3 +1,20 @@
+const spinnerOnoff = loadingTrueFalse =>{
+
+    const loaderSection = document.getElementById('spinner')
+    if(loadingTrueFalse){
+        const newsId = document.getElementById('news-id')
+        newsId.innerHTML = ''
+
+        const newsCountElm = document.getElementById('news-count')
+        newsCountElm.innerHTML = 'Loading'
+        loaderSection.classList.remove('d-none')
+    }
+    else{
+        loaderSection.classList.add('d-none')
+    }
+}
+
+
 const loadApi = async () => {
     try {
         const response = await fetch('https://openapi.programming-hero.com/api/news/categories')
@@ -17,7 +34,7 @@ const displayCat = async () => {
 
     for (cat of data) {
         const li = document.createElement('li')
-        li.innerHTML = `<li onclick="myFunction(${cat.category_id})" class="pe-3">
+        li.innerHTML = `<li onclick="myFunction(${cat.category_id}); spinnerOnoff(true) " class="pe-3">
         <a class="nav-link" href="#">${cat.category_name}</a>
       </li>`
         catElm.append(li)
@@ -35,6 +52,8 @@ const myFunction = async (id) => {
     // console.log(id)
 
     try {
+
+        // spinnerOnoff(true)
 
         const response = await fetch(`https://openapi.programming-hero.com/api/news/category/0${id}`)
         const data = await response.json()
@@ -82,9 +101,11 @@ const myFunction = async (id) => {
     
             newsId.append(div)
         }
+
+        spinnerOnoff(false)
     
         const newsCountElm = document.getElementById('news-count')
-        newsCountElm.innerText = `${data.data.length}  news in this category`
+        newsCountElm.innerText = `${data.data.length ? data.data.length : 'No' }  news in this category`
     } catch (e) {
         alert("There is error which shows " + e.message); //Handling error  
     }
@@ -102,11 +123,8 @@ const loadDetails = async id => {
         const res = await fetch(url)
         const data = await res.json()
 
-
         const titleElm = document.getElementById('title-id')
         const bodyElm = document.getElementById('title-body')
-
-
         titleElm.innerHTML = `${data.data[0].title}`
         bodyElm.innerHTML = `${data.data[0].details}`
     }
@@ -116,3 +134,5 @@ const loadDetails = async id => {
 
 
 }
+
+
