@@ -59,7 +59,7 @@ const myFunction = async (id) => {
 
 
 
-        console.log(sortedArr);
+        // console.log(sortedArr);
 
         const newsId = document.getElementById('news-id')
         newsId.innerHTML = ''
@@ -71,19 +71,19 @@ const myFunction = async (id) => {
             const div = document.createElement('div')
             div.innerHTML = `        <div class="card mb-3" style="max-width:1400px;">
             <div class="row g-0">
-                <div class="col-md-2">
+                <div class="col-md-2 col-sm-12">
                     <img src="${d.thumbnail_url}" class="img-fluid rounded-start" alt="...">
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-10  col-sm-12">
                     <div class="card-body">
                         <h5 class="card-title">${d.title}</h5>
                         <p class="card-text">${d.details.length > 250 ? d.details.slice(0, 250) + '.......' : d.details}</p>
                         <div class="d-flex flex-row justify-content-between ">
                             <div class="d-flex flex-row">
-                                <img src="${d.author.img}" width="50px" height="50px" class="img-fluid  rounded-circle me-2" alt="...">
-                                <p class="card-text mt-2 me-3"><small class="text-muted">${d.author.name ? d.author.name : "No Author Found"}</small></p>
+                                <img src="${d.author.img}" width="50px" height="50px" class=" rounded-circle me-2" alt="...">
+                                <p class="card-text  me-3"><small class="text-muted">${d.author.name ? d.author.name : "No Author Found"}</small></p>
                             </div>
-                            <p class="card-text"><small class="text-muted">Views: ${d.total_view ? d.total_view : "No Views"}</small></p>
+                            <p class="card-text"><small class="text-muted ">Views: ${d.total_view ? d.total_view : "No Views"}</small></p>
                             <div>
                                 <button onclick="loadDetails('${d._id}')" class="btn btn-primary btn-sm"
                                     style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
@@ -103,6 +103,9 @@ const myFunction = async (id) => {
 
         const newsCountElm = document.getElementById('news-count')
         newsCountElm.innerText = `${data.data.length ? data.data.length : 'No'}  news in this category`
+
+        // const apiData = await  loadApi()
+        // console.log(apiData)
     } catch (e) {
         alert("There is error which shows " + e.message); //Handling error  
     }
