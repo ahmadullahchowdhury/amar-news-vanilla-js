@@ -52,7 +52,6 @@ const myFunction = async (id) => {
         for (d of sorrtedArr) {
             // console.log(d)
     
-    
             const div = document.createElement('div')
             div.innerHTML = `        <div class="card mb-3" style="max-width:1400px;">
             <div class="row g-0">
@@ -62,13 +61,13 @@ const myFunction = async (id) => {
                 <div class="col-md-10">
                     <div class="card-body">
                         <h5 class="card-title">${d.title}</h5>
-                        <p class="card-text">${d.details.slice(0, 250)}</p>
+                        <p class="card-text">${d.details.slice(0, 250)}....</p>
                         <div class="d-flex flex-row justify-content-between ">
                             <div class="d-flex flex-row">
                                 <img src="${d.author.img}" width="50px" height="50px" class="img-fluid  rounded-circle me-2" alt="...">
                                 <p class="card-text mt-2 me-3"><small class="text-muted">${d.author.name ? d.author.name : "No Author Found"}</small></p>
                             </div>
-                            <p class="card-text"><small class="text-muted">${d.total_view ? d.total_view : "No Views"}</small></p>
+                            <p class="card-text"><small class="text-muted">Views: ${d.total_view ? d.total_view : "No Views"}</small></p>
                             <div>
                                 <button onclick="loadDetails('${d._id}')" class="btn btn-primary btn-sm"
                                     style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
@@ -91,6 +90,9 @@ const myFunction = async (id) => {
     }
 
 }
+
+myFunction(1)
+
 
 
 const loadDetails = async id => {
