@@ -33,11 +33,14 @@ const displayCat = async () => {
 
     for (cat of data) {
         const li = document.createElement('li')
-        li.innerHTML = `<li onclick="myFunction(${cat.category_id}); spinnerOnoff(true) " class="pe-3">
-        <a class="nav-link" href="#">${cat.category_name}</a>
+        li.innerHTML = `<li id="active-id" onclick="myFunction(${cat.category_id}); spinnerOnoff(true) ; active() " data-active class="px-1">
+        <a id="aS" class="p-1"  href="#">${cat.category_name}</a>
       </li>`
         catElm.append(li)
     }
+    const activeElm = document.getElementById('active-id')
+    activeElm.classList.add('active')
+
 }
 
 displayCat()
@@ -135,4 +138,20 @@ const loadDetails = async id => {
 
 }
 
+function active() {
+    const activeElm = document.querySelectorAll('[data-active]')
+
+    for(element of activeElm) {
+        element.classList.remove('active')
+    }
+
+    activeElm.forEach(element => {
+        element.addEventListener('click', function(e){
+            element.classList.add('active');
+            e.stopPropagation()
+            console.log('clicked')
+        })
+    });
+    
+}
 

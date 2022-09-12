@@ -15,10 +15,16 @@ body {
 }
 
 li:hover {
-    color: #0dcaf0
+    color: #0dcaf0;
+   
 }
 
+#aS{
+    color: white;
+    text-decoration: none;
+}
+.active{
+    border: 2px solid red;
+    border-radius: 10px;
+}
 
-
-/* #footer {
-           /* Footer height */
